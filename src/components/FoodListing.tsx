@@ -1,16 +1,31 @@
+import {useState, useEffect} from 'react';
+import axios from 'axios';
 
 function FoodListing(){
+    const [foodListing, setFoodListing] = useState([]);
+
+    useEffect(() => {
+        axios.get("http://localhost:8080/restaurant/menu").then(
+            response => {
+                setFoodListing(response.data)
+            }).catch(error => {
+                console.log(error);
+        });
+    }, []);
     return (
+
         <div>
             <div className="container is-fluid mt-6 pt-6">
                 <div className="fixed-grid has-5-cols">
                     <div className="grid">
-                        <div className="cell">
+                        {foodListing.map(({description, menu_id, name, photo}) => (
+
+                            <div className="cell" id={menu_id}>
                             <div className="card">
                                 <div className="card-image">
                                     <figure className="image is-4by3">
                                         <img
-                                            src="https://bulma.io/assets/images/placeholders/1280x960.png"
+                                            src={"http://localhost:8080/" + photo}
                                             alt="Placeholder image"
                                         />
                                     </figure>
@@ -18,8 +33,8 @@ function FoodListing(){
                                 <div className="card-content">
                                     <div className="media">
                                         <div className="media-content">
-                                            <p className="title is-4">Burger</p>
-                                            <p className="subtitle is-6">Burger</p>
+                                            <p className="title is-4 mb-2">{name}</p>
+                                            <p className="subtitle is-6">{description}</p>
                                         </div>
                                     </div>
 
@@ -27,6 +42,7 @@ function FoodListing(){
                             </div>
                         </div>
 
+                        ))}
 
 
 
@@ -34,6 +50,8 @@ function FoodListing(){
                 </div>
 
             </div>
+
+
         </div>
     )
 }
