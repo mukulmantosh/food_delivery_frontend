@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react';
 import axios from 'axios';
+import {Link} from "react-router-dom";
 
 function FoodListing(){
     const [foodListing, setFoodListing] = useState([]);
@@ -24,10 +25,12 @@ function FoodListing(){
                             <div className="card">
                                 <div className="card-image">
                                     <figure className="image is-4by3">
+                                        <Link to={`/restaurant/${menu_id}`} state={{photo,description,name }}>
                                         <img
                                             src={"http://localhost:8080/" + photo}
                                             alt="Placeholder image"
                                         />
+                                        </Link>
                                     </figure>
                                 </div>
                                 <div className="card-content">
