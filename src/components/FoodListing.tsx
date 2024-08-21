@@ -19,16 +19,21 @@ function FoodListing(){
             <div className="container is-fluid mt-6 pt-6">
                 <div className="fixed-grid has-5-cols">
                     <div className="grid">
-                        {foodListing.map(({description, menu_id, name, photo}) => (
+                        {foodListing.map(({description,
+                                              menu_id,
+                                              restaurant_id,
+                                              name,
+                                              photo,
+                                              price,
+                                              category}) => (
 
-                            <div className="cell" id={menu_id}>
+                            <div className="cell" key={menu_id}>
                             <div className="card">
                                 <div className="card-image">
                                     <figure className="image is-4by3">
-                                        <Link to={`/restaurant/${menu_id}`} state={{photo,description,name }}>
+                                        <Link to={`/restaurant/${menu_id}`} state={{photo,description,name,price,category,restaurant_id }}>
                                         <img
                                             src={"http://localhost:8080/" + photo}
-                                            alt="Placeholder image"
                                         />
                                         </Link>
                                     </figure>
@@ -36,8 +41,7 @@ function FoodListing(){
                                 <div className="card-content">
                                     <div className="media">
                                         <div className="media-content">
-                                            <p className="title is-4 mb-2">{name}</p>
-                                            <p className="subtitle is-6">{description}</p>
+                                            <p className="title is-4 mb-2 has-text-centered">{name}</p>
                                         </div>
                                     </div>
 
