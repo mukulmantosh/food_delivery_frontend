@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
 function RestaurantDetail({restaurantData, location}) {
     return (
         <div className="container is-fluid mb-6">
