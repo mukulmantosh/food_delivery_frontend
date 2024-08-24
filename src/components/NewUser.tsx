@@ -38,7 +38,7 @@ function NewUser() {
 
     return (
         <div>
-            <h2>Create a Post</h2>
+            <h2>User</h2>
             <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="title">Title:</label>
