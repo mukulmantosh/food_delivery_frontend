@@ -1,16 +1,17 @@
 import axios from "axios";
 import {useState} from "react";
+import toast, { Toaster } from 'react-hot-toast';
 
 interface PostData {
-    title: string;
-    body: string;
+    name: string;
+    email: string;
+    password: string;
 }
 
 function NewUser() {
-    const [title, setTitle] = useState<string>('');
-    const [body, setBody] = useState<string>('');
-    const [responseMessage, setResponseMessage] = useState<string>('');
-    const [error, setError] = useState<string | null>(null);
+    const [name, setName] = useState<string>('');
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
 
     // Handle form submission
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -18,50 +19,77 @@ function NewUser() {
 
         // Create the data object to be sent
         const postData: PostData = {
-            title,
-            body
+            name,
+            email,
+            password
         };
 
         try {
             // Make the POST request using Axios
-            const response = await axios.post('https://jsonplaceholder.typicode.com/posts', postData);
+            const response = await axios.post('http://localhost:8080/user/', postData);
+            if (response.status === 201) {
+               toast.success(response.data.message);
+            }
 
-            // Handle the response
-            setResponseMessage(`Post created with ID: ${response.data.id}`);
-            setError(null);
+            // Reset the form fields
+            setName('')
+            setEmail('')
+            setPassword('')
+
+
         } catch (err) {
             // Handle any errors
-            setError('Failed to create post');
-            setResponseMessage('');
+            toast.error("Something went wrong." + err)
         }
+
     };
 
     return (
         <div>
-            <h2>User</h2>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="title">Title:</label>
-                    <input
-                        type="text"
-                        id="title"
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                    />
+            <Toaster />
+            <div className="container">
+                <div className="columns mt-6">
+                    <div className="column auto"></div>
+                    <div className="column is-two-fifths">
+                        <form onSubmit={handleSubmit}>
+                            <div className="field">
+                                <label className="label">Name</label>
+                                <div className="control">
+                                    <input className="input" type="text" value={name}
+                                           placeholder="Your FullName" onChange={(e) => setName(e.target.value)}/>
+                                </div>
+                            </div>
+
+                            <div className="field">
+                                <label className="label">Email</label>
+                                <div className="control">
+                                    <input className="input" type="email" value={email}
+                                           onChange={(e) => setEmail(e.target.value)}/>
+                                </div>
+                            </div>
+
+                            <div className="field">
+                                <label className="label">Password</label>
+                                <div className="control">
+                                    <input className="input" type="password" value={password}
+                                           onChange={(e) => setPassword(e.target.value)}/>
+                                </div>
+                            </div>
+
+
+                            <div className="field is-grouped">
+                                <div className="control">
+                                    <button type="submit" className="button is-link">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div className="column auto"></div>
                 </div>
-                <div>
-                    <label htmlFor="body">Body:</label>
-                    <textarea
-                        id="body"
-                        value={body}
-                        onChange={(e) => setBody(e.target.value)}
-                    />
-                </div>
-                <button type="submit">Submit</button>
-            </form>
-            {responseMessage && <p>{responseMessage}</p>}
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+            </div>
         </div>
+
+
     );
 }
 
