@@ -80,6 +80,8 @@ function NewUser() {
                             <div className="field is-grouped">
                                 <div className="control">
                                     <button type="submit" className="button is-link">Submit</button>
+                                    <a className="ml-3 button is-primary">Login</a>
+
                                 </div>
                             </div>
                         </form>
