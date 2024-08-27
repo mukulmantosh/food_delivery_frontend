@@ -14,7 +14,7 @@ function Header() {
                     <div className="column">
                         <figure className="image is-48x48 mt-5">
                             <a href="/user/create">
-                            <img alt="user" src="../../public/images/user-128.svg"/>
+                            <img alt="user" src="/images/user-128.svg"/>
                             </a>
                         </figure>
                     </div>
