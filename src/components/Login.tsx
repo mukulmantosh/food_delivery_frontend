@@ -1,38 +1,38 @@
 import axios from "axios";
 import {useState} from "react";
 import toast, { Toaster } from 'react-hot-toast';
+import useAuth from "../context/auth";
 
-interface PostData {
-    name: string;
+interface LoginData {
     email: string;
     password: string;
 }
 
-function NewUser() {
-    const [name, setName] = useState<string>('');
+
+function Login() {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+    const { login } = useAuth();
 
     // Handle form submission
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         // Create the data object to be sent
-        const postData: PostData = {
-            name,
+        const postData: LoginData = {
             email,
             password
         };
 
         try {
             // Make the POST request using Axios
-            const response = await axios.post('http://localhost:8080/user/', postData);
-            if (response.status === 201) {
-               toast.success(response.data.message);
+            const response = await axios.post('http://localhost:8080/user/login', postData);
+            if (response.status === 200) {
+                const { token } = response.data;
+                login(token)
             }
 
             // Reset the form fields
-            setName('')
             setEmail('')
             setPassword('')
 
@@ -51,13 +51,7 @@ function NewUser() {
                     <div className="column auto"></div>
                     <div className="column is-two-fifths">
                         <form onSubmit={handleSubmit}>
-                            <div className="field">
-                                <label className="label">Name</label>
-                                <div className="control">
-                                    <input className="input" type="text" value={name} required={true}
-                                           placeholder="Your FullName" onChange={(e) => setName(e.target.value)}/>
-                                </div>
-                            </div>
+
 
                             <div className="field">
                                 <label className="label">Email</label>
@@ -78,9 +72,7 @@ function NewUser() {
 
                             <div className="field is-grouped">
                                 <div className="control">
-                                    <button type="submit" className="button is-link">Submit</button>
-                                    <a href="/user/login" className="ml-3 button is-primary">Login</a>
-
+                                    <button type="submit" className="button is-link">Login</button>
                                 </div>
                             </div>
                         </form>
@@ -95,4 +87,4 @@ function NewUser() {
 }
 
 
-export default NewUser;
+export default Login;
