@@ -1,6 +1,8 @@
 import axios from "axios";
 import {useState} from "react";
 import toast, { Toaster } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
+
 import useAuth from "../context/auth";
 
 interface LoginData {
@@ -13,6 +15,8 @@ function Login() {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const { login } = useAuth();
+    const navigate = useNavigate();
+
 
     // Handle form submission
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -30,6 +34,8 @@ function Login() {
             if (response.status === 200) {
                 const { token } = response.data;
                 login(token)
+                navigate('/');
+
             }
 
             // Reset the form fields

@@ -23,6 +23,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         setIsAuthenticated(true);
         setUser(decodedToken.name);
         localStorage.setItem('token', token);
+
+
     };
 
     const logout = () => {
