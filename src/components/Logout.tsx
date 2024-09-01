@@ -7,11 +7,12 @@ function Logout() {
     const navigate = useNavigate();
 
     const { logout } = useAuth();
-    logout()
+
 
     useEffect(() => {
+        logout()
         navigate("/")
-    }, [navigate]);
+    }, [logout,navigate]);
 
     return null;
 

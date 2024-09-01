@@ -1,7 +1,6 @@
 import Header from "./components/Header";
 import FoodListing from "./components/FoodListing";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext';
 
 import FoodDetail from "./components/FoodDetail.tsx";
 import NewUser from "./components/NewUser.tsx";
@@ -13,7 +12,6 @@ import Logout from "./components/Logout.tsx";
 
 function App() {
     return (
-        <AuthProvider>
         <BrowserRouter>
         <div>
         <Header/>
@@ -39,7 +37,6 @@ function App() {
         </Routes>
         </div>
         </BrowserRouter>
-        </AuthProvider>
     )
 }
 
