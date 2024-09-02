@@ -1,3 +1,4 @@
+import UserIcon from "./UserIcon.tsx";
 
 function Header() {
     return (
@@ -12,11 +13,7 @@ function Header() {
                     </div>
                     <div className="column is-one-third"></div>
                     <div className="column">
-                        <figure className="image is-48x48 mt-5">
-                            <a href="/user/register">
-                            <img alt="user" src="/images/user-128.svg"/>
-                            </a>
-                        </figure>
+                        <UserIcon/>
                     </div>
                 </div>
             </div>
