@@ -23,7 +23,7 @@ function CartListing() {
 
                 {cartList && cartList.items.map((item, index) => (
 
-                    <div className="panel-block" key={index}>
+                    <div className="panel-block" key={item.cart_item_id}>
                         <figure className="image is-128x128">
                             <img src={"http://localhost:8080/" + item.menu_item.photo}/>
                         </figure>
