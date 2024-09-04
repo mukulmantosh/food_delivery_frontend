@@ -1,4 +1,5 @@
 import UserIcon from "./UserIcon.tsx";
+import Cart from "./Cart.tsx";
 
 function Header() {
     return (
@@ -11,9 +12,12 @@ function Header() {
                             <p className="subtitle is-size-3">Smoky Goodness in Every Bite</p>
                         </div>
                     </div>
-                    <div className="column is-one-third"></div>
+                    <div className="column is-two-third"></div>
                     <div className="column">
                         <UserIcon/>
+                    </div>
+                    <div className="column">
+                        <Cart/>
                     </div>
                 </div>
             </div>

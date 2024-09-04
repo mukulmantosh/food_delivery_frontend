@@ -9,6 +9,7 @@ import ProtectedRoutes from "./routes/ProtectedRoutes";
 import Login from "./components/Login.tsx";
 import HideRoutes from "./routes/HideRoutes.tsx";
 import Logout from "./components/Logout.tsx";
+import CartListing from "./components/CartListing.tsx";
 
 function App() {
     return (
@@ -29,6 +30,10 @@ function App() {
 
             <Route element={<ProtectedRoutes/>}>
                 <Route path="/review" element={<Review/>}/>
+            </Route>
+
+            <Route element={<ProtectedRoutes/>}>
+                <Route path="/cart" element={<CartListing/>}/>
             </Route>
 
             <Route path="/user/logout" element={<Logout/>}/>
