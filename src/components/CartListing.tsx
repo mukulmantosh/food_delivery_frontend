@@ -1,9 +1,10 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
+import {ItemsResponse} from "../types/CartListing.ts";
 
 
 function CartListing() {
-    const [cartList, setCartList] = useState(null);
+    const [cartList, setCartList] = useState<ItemsResponse | null>(null);
 
         useEffect(() => {
             const token = localStorage.getItem("token");
@@ -21,7 +22,7 @@ function CartListing() {
             <nav className="panel">
                 <p className="panel-heading">Cart</p>
 
-                {cartList && cartList.items.map((item, index) => (
+                {cartList && cartList.items.map((item) => (
 
                     <div className="panel-block" key={item.cart_item_id}>
                         <figure className="image is-128x128">
