@@ -1,10 +1,12 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {ItemsResponse} from "../types/CartListing.ts";
+import {useNavigate} from "react-router-dom";
 
 
 function CartListing() {
     const [cartList, setCartList] = useState<ItemsResponse | null>(null);
+    const navigate = useNavigate();
 
         useEffect(() => {
             const token = localStorage.getItem("token");
@@ -15,6 +17,17 @@ function CartListing() {
                 console.log(error);
             });
         }, []);
+
+    const removeItemFromCart = (cart_item_id: number) => {
+        const token = localStorage.getItem("token");
+
+        axios.delete("http://localhost:8080/cart/remove/" + cart_item_id, {headers: {"Authorization": "Bearer " + token}}).then(() => {
+            const updatedCartItems = cartList.items.filter(item => item.cart_item_id !== cart_item_id);
+            setCartList(prevState => ({...prevState, items: updatedCartItems}));
+
+        })
+    }
+
 
 
     return (<div>
@@ -36,7 +49,7 @@ function CartListing() {
                             <div className="column is-5 has-text-centered">Quantity: {item.quantity}</div>
                             <div className="column is-5 has-text-centered">${item.menu_item.price}</div>
                             <div className="column has-text-centered">
-                                <button className="button is-info">REMOVE</button>
+                                <button onClick={() => removeItemFromCart(item.cart_item_id)} className="button is-info">REMOVE</button>
                             </div>
                         </div>
 
@@ -44,7 +57,9 @@ function CartListing() {
                 ))}
 
             </nav>
-        </div>
+            <button className="button is-primary">PLACE ORDER</button>
+            </div>
+
     </div>)
 }
 
