@@ -1,4 +1,4 @@
-import {useLocation} from "react-router-dom";
+import {useLocation, useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import RestaurantDetail from "./RestaurantDetail.tsx";
@@ -15,8 +15,11 @@ interface Restaurant {
 function FoodDetail() {
     const [restaurantData, setRestaurantData] = useState<Restaurant | null>(null);
 
-    //const {id} = useParams();
+    const {id} = useParams();
     const location = useLocation();
+
+    const navigate = useNavigate();
+
 
     useEffect(() => {
         axios.get("http://localhost:8080/restaurant/" + location.state.restaurant_id).then(
@@ -26,6 +29,24 @@ function FoodDetail() {
             console.log(error);
         });
     }, []);
+
+    const submitCart = () => {
+        console.log("clicked.")
+        const token = localStorage.getItem("token");
+
+        if (typeof id === "string") {
+            axios.post("http://localhost:8080/cart/add", {
+                "item_id": parseInt(id, 10),
+                "restaurant_id": location.state.restaurant_id,
+                "quantity": 1,
+            }, {headers: {"Authorization": "Bearer " + token}}).then(() => {
+                navigate("/cart");
+            })
+        }
+
+
+
+    }
 
     return (
         <div>
@@ -62,7 +83,7 @@ function FoodDetail() {
                                     </p>
                                     <p className="title is-4 has-text-success">${location.state.price}</p>
 
-                                    <button className="button is-large">ADD</button>
+                                    <button onClick={submitCart} className="button is-large">ADD</button>
 
                                 </div>
 
