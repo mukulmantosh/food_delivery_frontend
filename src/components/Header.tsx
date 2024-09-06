@@ -1,9 +1,11 @@
 import UserIcon from "./UserIcon.tsx";
 import Cart from "./Cart.tsx";
+import {Toaster} from "react-hot-toast";
 
 function Header() {
     return (
         <div>
+            <Toaster/>
             <div className="container">
                 <div className="columns">
                     <div className="column is-full">

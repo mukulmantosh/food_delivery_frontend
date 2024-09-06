@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import {ItemsResponse} from "../types/CartListing.ts";
 import {useNavigate} from "react-router-dom";
+import toast, {Toaster} from 'react-hot-toast';
 
 
 function CartListing() {
@@ -28,10 +29,22 @@ function CartListing() {
         })
     }
 
+    const PlaceOrder = () => {
+        const token = localStorage.getItem("token");
+        axios.post("http://localhost:8080/cart/order/new", {}, {headers: {"Authorization": "Bearer " + token}}).then((response) => {
+            toast.success(response.data.message);
+            navigate("/");
+
+        }).catch(error => {
+            toast.error(error.message);
+        })
+
+    }
 
 
     return (<div>
         <div className="container mt-5 mb-5">
+            <Toaster />
             <nav className="panel">
                 <p className="panel-heading">Cart</p>
                 {cartList?.items?.map((item) => (
@@ -57,7 +70,7 @@ function CartListing() {
                 ))}
 
             </nav>
-            <button className="button is-primary">PLACE ORDER</button>
+            <button onClick={PlaceOrder} className="button is-primary">PLACE ORDER</button>
             </div>
 
     </div>)
