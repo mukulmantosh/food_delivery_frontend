@@ -1,16 +1,9 @@
 import Header from "./components/Header/Header";
-import FoodListing from "./components/FoodListing";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
-import FoodDetail from "./components/FoodDetail.tsx";
-import NewUser from "./components/NewUser.tsx";
-import Review from "./components/Review.tsx";
-import ProtectedRoutes from "./routes/ProtectedRoutes";
-import Login from "./components/Login.tsx";
-import HideRoutes from "./routes/HideRoutes.tsx";
-import Logout from "./components/Logout.tsx";
-import CartListing from "./components/CartListing.tsx";
-import OrderListing from "./components/OrderListing.tsx";
+import CartRoutes from "./routes/cart/CartRoutes.tsx";
+import FoodRoutes from "./routes/restaurant/FoodRoutes.tsx";
+import UserRoutes from "./routes/user/UserRoutes.tsx";
+import ReviewRoutes from "./routes/review/ReviewRoutes.tsx";
 
 function App() {
     return (
@@ -18,32 +11,10 @@ function App() {
         <div>
         <Header/>
         <Routes>
-            <Route path="/" element={<FoodListing/>} />
-            <Route path="/restaurant/:id" element={<FoodDetail/>}/>
-
-            <Route element={<HideRoutes/>}>
-            <Route path="/user/register" element={<NewUser/>}/>
-            </Route>
-
-            <Route element={<HideRoutes/>}>
-                <Route path="/user/login" element={<Login/>}/>
-            </Route>
-
-            <Route element={<ProtectedRoutes/>}>
-                <Route path="/review" element={<Review/>}/>
-            </Route>
-
-            <Route element={<ProtectedRoutes/>}>
-                <Route path="/cart" element={<CartListing/>}/>
-            </Route>
-
-            <Route element={<ProtectedRoutes/>}>
-                <Route path="/orders" element={<OrderListing/>}/>
-            </Route>
-
-            <Route path="/user/logout" element={<Logout/>}/>
-
-
+            <Route path="/*" element={<FoodRoutes />} />
+            <Route path="/user/*" element={<UserRoutes />} />
+            <Route path="/review/*" element={<ReviewRoutes />} />
+            <Route path="/cart/*" element={<CartRoutes />} />
         </Routes>
         </div>
         </BrowserRouter>
