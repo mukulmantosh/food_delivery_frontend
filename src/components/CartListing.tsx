@@ -23,6 +23,9 @@ function CartListing() {
         const token = localStorage.getItem("token");
 
         axios.delete("http://localhost:8080/cart/remove/" + cart_item_id, {headers: {"Authorization": "Bearer " + token}}).then(() => {
+            
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-expect-error
             const updatedCartItems = cartList.items.filter(item => item.cart_item_id !== cart_item_id);
             setCartList(prevState => ({...prevState, items: updatedCartItems}));
 
