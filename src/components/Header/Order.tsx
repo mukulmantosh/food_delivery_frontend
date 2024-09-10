@@ -1,5 +1,5 @@
 import {Link} from "react-router-dom";
-import {ORDERS_URL} from "../../routes/urls.ts";
+import {ORDERS_URL} from "../../utils/urls.ts";
 
 function Order(){
     return <figure className="image is-48x48 mt-5">

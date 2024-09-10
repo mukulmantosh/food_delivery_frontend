@@ -1,6 +1,8 @@
 import axios from "axios";
 import {useState} from "react";
 import toast, { Toaster } from 'react-hot-toast';
+import {Link} from "react-router-dom";
+import {USER_LOGIN_URL} from "../utils/urls.ts";
 
 interface PostData {
     name: string;
@@ -79,8 +81,7 @@ function NewUser() {
                             <div className="field is-grouped">
                                 <div className="control">
                                     <button type="submit" className="button is-link">Submit</button>
-                                    <a href="/user/login" className="ml-3 button is-primary">Login</a>
-
+                                    <Link to={USER_LOGIN_URL} className="ml-3 button is-primary">Login</Link>
                                 </div>
                             </div>
                         </form>
