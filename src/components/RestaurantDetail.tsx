@@ -1,3 +1,5 @@
+import {API_BASE_URL} from "../utils/urls.ts";
+
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
 function RestaurantDetail({restaurantData, location}) {
@@ -14,7 +16,7 @@ function RestaurantDetail({restaurantData, location}) {
                                 <div className="card-image">
                                     <figure className="image is-6by3">
                                         <img className="box-shadow-large"
-                                             src={restaurantData ? "http://localhost:8080/" + restaurantData.store_image : ""}
+                                             src={restaurantData ? API_BASE_URL + "/" + restaurantData.store_image : ""}
                                              alt={location.state.name}/>
 
                                     </figure>

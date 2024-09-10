@@ -2,7 +2,7 @@ import axios from "axios";
 import {useState} from "react";
 import toast, { Toaster } from 'react-hot-toast';
 import {Link} from "react-router-dom";
-import {USER_LOGIN_URL} from "../utils/urls.ts";
+import {API_BASE_URL, USER_LOGIN_URL} from "../utils/urls.ts";
 
 interface PostData {
     name: string;
@@ -28,7 +28,7 @@ function NewUser() {
 
         try {
             // Make the POST request using Axios
-            const response = await axios.post('http://localhost:8080/user/', postData);
+            const response = await axios.post(API_BASE_URL + "/user/", postData);
             if (response.status === 201) {
                toast.success(response.data.message);
             }

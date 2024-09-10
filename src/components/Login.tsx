@@ -4,6 +4,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
 import useAuth from "../context/auth";
+import {API_BASE_URL} from "../utils/urls.ts";
 
 interface LoginData {
     email: string;
@@ -29,8 +30,7 @@ function Login() {
         };
 
         try {
-            // Make the POST request using Axios
-            const response = await axios.post('http://localhost:8080/user/login', postData);
+            const response = await axios.post(API_BASE_URL + '/user/login', postData);
             if (response.status === 200) {
                 const { token } = response.data;
                 login(token)

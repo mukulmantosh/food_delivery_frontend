@@ -5,3 +5,10 @@ export const ORDERS_URL = "/cart/orders"
 export const CART_URL = "/cart"
 
 
+const ORDER_DETAIL_URL = "/cart/order/:id"
+export function getOrderDetailUrl(id: number | string): string {
+    return ORDER_DETAIL_URL.replace(":id", id.toString());
+}
+
+
+export const API_BASE_URL = "http://localhost:8080"

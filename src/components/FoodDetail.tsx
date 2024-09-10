@@ -2,6 +2,7 @@ import {useLocation, useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import RestaurantDetail from "./RestaurantDetail.tsx";
+import {API_BASE_URL} from "../utils/urls.ts";
 
 interface Restaurant {
     name: string
@@ -22,7 +23,7 @@ function FoodDetail() {
 
 
     useEffect(() => {
-        axios.get("http://localhost:8080/restaurant/" + location.state.restaurant_id).then(
+        axios.get(API_BASE_URL + "/restaurant/" + location.state.restaurant_id).then(
             response => {
                 setRestaurantData(response.data)
             }).catch(error => {
@@ -38,7 +39,7 @@ function FoodDetail() {
         }
 
         if (typeof id === "string") {
-            axios.post("http://localhost:8080/cart/add", {
+            axios.post(API_BASE_URL + "/cart/add", {
                 "item_id": parseInt(id, 10),
                 "restaurant_id": location.state.restaurant_id,
                 "quantity": 1,
@@ -65,7 +66,7 @@ function FoodDetail() {
                                         <div className="card-image">
                                             <figure className="image is-4by3">
                                                 <img className="box-shadow-large"
-                                                     src={"http://localhost:8080/" + location.state.photo}
+                                                     src={API_BASE_URL + "/" + location.state.photo}
                                                      alt={location.state.name}/>
 
                                             </figure>

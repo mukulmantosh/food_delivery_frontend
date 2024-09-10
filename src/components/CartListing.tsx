@@ -3,6 +3,7 @@ import axios from "axios";
 import {ItemsResponse} from "../types/CartListing.ts";
 import {useNavigate} from "react-router-dom";
 import toast, {Toaster} from 'react-hot-toast';
+import {API_BASE_URL} from "../utils/urls.ts";
 
 
 function CartListing() {
@@ -11,7 +12,7 @@ function CartListing() {
 
         useEffect(() => {
             const token = localStorage.getItem("token");
-            axios.get("http://localhost:8080/cart/list", {headers: {"Authorization": "Bearer " + token}}).then(
+            axios.get(API_BASE_URL + "/cart/list", {headers: {"Authorization": "Bearer " + token}}).then(
                 response => {
                     setCartList(response.data)
                 }).catch(error => {
@@ -22,7 +23,7 @@ function CartListing() {
     const removeItemFromCart = (cart_item_id: number) => {
         const token = localStorage.getItem("token");
 
-        axios.delete("http://localhost:8080/cart/remove/" + cart_item_id, {headers: {"Authorization": "Bearer " + token}}).then(() => {
+        axios.delete(API_BASE_URL + "/cart/remove/" + cart_item_id, {headers: {"Authorization": "Bearer " + token}}).then(() => {
             
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-expect-error
@@ -34,7 +35,7 @@ function CartListing() {
 
     const PlaceOrder = () => {
         const token = localStorage.getItem("token");
-        axios.post("http://localhost:8080/cart/order/new", {}, {headers: {"Authorization": "Bearer " + token}}).then((response) => {
+        axios.post(API_BASE_URL + "/cart/order/new", {}, {headers: {"Authorization": "Bearer " + token}}).then((response) => {
             toast.success(response.data.message);
             navigate("/");
 
@@ -56,7 +57,7 @@ function CartListing() {
                     <div className="panel-block" key={item.cart_item_id}>
 
                         <figure className="image is-128x128">
-                            <img src={"http://localhost:8080/" + item.menu_item.photo}/>
+                            <img alt={item.menu_item.name} src={API_BASE_URL + "/" + item.menu_item.photo}/>
                         </figure>
 
 

@@ -1,12 +1,13 @@
 import {useState, useEffect} from 'react';
 import axios from 'axios';
 import {Link} from "react-router-dom";
+import {API_BASE_URL} from "../utils/urls.ts";
 
 function FoodListing(){
     const [foodListing, setFoodListing] = useState([]);
 
     useEffect(() => {
-        axios.get("http://localhost:8080/restaurant/menu").then(
+        axios.get(API_BASE_URL + "/restaurant/menu").then(
             response => {
                 setFoodListing(response.data)
             }).catch(error => {
@@ -33,7 +34,7 @@ function FoodListing(){
                                     <figure className="image is-4by3">
                                         <Link to={`/restaurant/${menu_id}`} state={{photo,description,name,price,category,restaurant_id }}>
                                         <img
-                                            src={"http://localhost:8080/" + photo}
+                                            src={API_BASE_URL + "/" + photo}
                                         />
                                         </Link>
                                     </figure>

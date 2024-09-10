@@ -2,13 +2,15 @@ import {useEffect, useState} from "react";
 import {OrderListingResponse} from "../../types/OrderListing.ts";
 import ConvertToReadableDateTime from "../../utils/dateFormat.ts";
 import axios from "axios";
+import {Link} from "react-router-dom";
+import {API_BASE_URL, getOrderDetailUrl} from "../../utils/urls.ts";
 
 function OrderListing() {
     const [orderList, setOrderList] = useState<OrderListingResponse | null>(null);
 
     useEffect(() => {
         const token = localStorage.getItem("token");
-        axios.get("http://localhost:8080/cart/orders", {headers: {"Authorization": "Bearer " + token}}).then(
+        axios.get(API_BASE_URL + "/cart/orders", {headers: {"Authorization": "Bearer " + token}}).then(
             response => {
                 setOrderList(response.data)
             }).catch(error => {
@@ -43,19 +45,18 @@ function OrderListing() {
                     </thead>
                     <tbody>
                     {orderList?.orders?.map((data) => (
-                    <tr>
-                        <td>{data.order_id}</td>
+                    <tr key={data.order_id}>
+
+                        <td><Link to={getOrderDetailUrl(data.order_id)}>{data.order_id}</Link></td>
                         <td>{OrderStatus(data.order_status)}</td>
                         <td>{data.total_amount}</td>
                         <td>{data.delivery_address}</td>
                         <td>{ConvertToReadableDateTime(data.CreatedAt)}</td>
                     </tr>
                     ))}
-
                     </tbody>
                 </table>
             </div>
-
         </div>
     )
 }
