@@ -1,4 +1,4 @@
-import useAuth from "../context/auth.tsx";
+import useAuth from "../../context/auth.tsx";
 
 
 function UserIcon() {

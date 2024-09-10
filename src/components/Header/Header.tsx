@@ -1,6 +1,7 @@
 import UserIcon from "./UserIcon.tsx";
 import Cart from "./Cart.tsx";
 import {Toaster} from "react-hot-toast";
+import Order from "./Order.tsx";
 
 function Header() {
     return (
@@ -20,6 +21,9 @@ function Header() {
                     </div>
                     <div className="column">
                         <Cart/>
+                    </div>
+                    <div className="column">
+                        <Order/>
                     </div>
                 </div>
             </div>

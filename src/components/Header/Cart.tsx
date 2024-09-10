@@ -1,5 +1,3 @@
-
-
 function Cart() {
     return <figure className="image is-48x48 mt-5">
         <a href="/cart">

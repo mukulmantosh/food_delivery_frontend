@@ -31,8 +31,11 @@ function FoodDetail() {
     }, []);
 
     const submitCart = () => {
-        console.log("clicked.")
         const token = localStorage.getItem("token");
+        if(token == null){
+            navigate("/user/login");
+            return false;
+        }
 
         if (typeof id === "string") {
             axios.post("http://localhost:8080/cart/add", {
