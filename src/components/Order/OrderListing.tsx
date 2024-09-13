@@ -4,6 +4,8 @@ import ConvertToReadableDateTime from "../../utils/dateFormat.ts";
 import axios from "axios";
 import {Link} from "react-router-dom";
 import {API_BASE_URL, getOrderDetailUrl} from "../../utils/urls.ts";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faMotorcycle} from "@fortawesome/free-solid-svg-icons";
 
 function OrderListing() {
     const [orderList, setOrderList] = useState<OrderListingResponse | null>(null);
@@ -18,13 +20,23 @@ function OrderListing() {
         });
     }, []);
 
-    function OrderStatus(status: string){
+
+
+    function OrderStatus(status: string, id: number){
+        const ORDER_DELIVERY_INFO_LISTING_URL = "/cart/order/deliveries/" + id
+
         if(status == "in_progress") {
             return <span className="tag is-link">IN PROGRESS</span>
         } else if (status == "failed"){
             return <span className="tag is-danger">FAILED</span>
         } else if (status == "delivered"){
             return <span className="tag is-success">DELIVERED</span>
+        } else if (status == "on_the_way"){
+            return (<><span className="tag is-primary">ON THE WAY</span>
+                <Link to={ORDER_DELIVERY_INFO_LISTING_URL}>
+                <span className="ml-3 tag is-dark"> RIDER INFO <FontAwesomeIcon className="ml-3"  icon={faMotorcycle} /></span>
+                </Link>
+            </>)
         }
     }
 
@@ -48,7 +60,7 @@ function OrderListing() {
                     <tr key={data.order_id}>
 
                         <td><Link to={getOrderDetailUrl(data.order_id)}>{data.order_id}</Link></td>
-                        <td>{OrderStatus(data.order_status)}</td>
+                        <td>{OrderStatus(data.order_status, data.order_id)}</td>
                         <td>{data.total_amount}</td>
                         <td>{data.delivery_address}</td>
                         <td>{ConvertToReadableDateTime(data.CreatedAt)}</td>

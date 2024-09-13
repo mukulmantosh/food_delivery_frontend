@@ -11,4 +11,5 @@ export function getOrderDetailUrl(id: number | string): string {
 }
 
 
+
 export const API_BASE_URL = "http://localhost:8080"
