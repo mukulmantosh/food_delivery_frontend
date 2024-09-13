@@ -4,6 +4,8 @@ import axios from "axios";
 import {useParams} from "react-router-dom";
 import {API_BASE_URL} from "../../utils/urls.ts";
 import {DeliveryListingResponse} from "../../types/DeliveryListing.ts";
+import {faPhone, faCar} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 function OrderDeliverInfoListing() {
     const [deliveryList, setDeliverList] = useState<DeliveryListingResponse | null>(null);
@@ -40,8 +42,8 @@ function OrderDeliverInfoListing() {
                         <tr key={data.delivery_id}>
                             <td>{data.delivery_id}</td>
                             <td>{data.name}</td>
-                            <td>{data.vehicle_details}</td>
-                            <td>{data.phone}</td>
+                            <td><FontAwesomeIcon className="mr-1"  icon={faCar} /> {data.vehicle_details} </td>
+                            <td><FontAwesomeIcon className="mr-1" icon={faPhone} /> {data.phone} </td>
                             <td>{data.delivery_time}</td>
                             <td>{ConvertToReadableDateTime(data.created_at)}</td>
                         </tr>

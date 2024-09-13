@@ -31,6 +31,8 @@ function OrderListing() {
             return <span className="tag is-danger">FAILED</span>
         } else if (status == "delivered"){
             return <span className="tag is-success">DELIVERED</span>
+        } else if (status == "cancelled"){
+            return <span className="tag is-warning">CANCELLED</span>
         } else if (status == "on_the_way"){
             return (<><span className="tag is-primary">ON THE WAY</span>
                 <Link to={ORDER_DELIVERY_INFO_LISTING_URL}>
