@@ -2,10 +2,12 @@ import UserIcon from "./UserIcon.tsx";
 import Cart from "./Cart.tsx";
 import {Toaster} from "react-hot-toast";
 import Order from "./Order.tsx";
+import Notification from "./Notification.tsx";
 
 function Header() {
     return (
         <div>
+            <Notification/>
             <Toaster/>
             <div className="container">
                 <div className="columns">
