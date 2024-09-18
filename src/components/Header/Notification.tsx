@@ -1,8 +1,6 @@
 import { useEffect } from 'react';
 import toast from "react-hot-toast";
 
-
-// WebSocketProvider component
 function Notification(){
 
     useEffect(() => {
@@ -19,10 +17,10 @@ function Notification(){
 
         ws.onmessage = (event) => {
             console.log('Message from server:', event.data);
-            toast(
+            toast.success(
                 event.data,
                 {
-                    duration: 6000,
+                    duration: 4000,
                 }
             );
         };
