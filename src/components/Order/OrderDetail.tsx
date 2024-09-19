@@ -2,7 +2,6 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import {useParams} from "react-router-dom";
 import {OrderDetailResponse} from "../../types/OrderDetail.ts";
-import ConvertToReadableDateTime from "../../utils/dateFormat.ts";
 import {API_BASE_URL} from "../../utils/urls.ts";
 
 function OrderDetail() {
@@ -32,18 +31,17 @@ function OrderDetail() {
             {orderDetail?.orders?.map((data) => (
                 <div className="container order-detail mt-6" key={data.order_item_id}>
                     <section className="order-header">
-                        <h1 className="title">Order Item #{data.order_item_id}</h1>
-                        <p className="subtitle mb-6">{ConvertToReadableDateTime(data.CreatedAt)}</p>
+
                     </section>
 
 
                     <section className="order-items box">
-                        <h2 className="title is-4">Order Items</h2>
                         <div className="order-item">
                             <div className="columns">
                                 <div className="column is-6">
                                     <p><strong>{data.MenuItem.name}</strong></p>
-                                    <img className="image is-128x128 mt-5" alt={data.MenuItem.name} src={API_BASE_URL + "/" + data.MenuItem.photo} />
+                                    <img className="image is-128x128 mt-5" alt={data.MenuItem.name}
+                                         src={API_BASE_URL + "/" + data.MenuItem.photo}/>
 
                                 </div>
                                 <div className="column is-6 has-text-right">
@@ -80,7 +78,8 @@ function OrderDetail() {
                     </div>
                 </section>
             </div>
-            </div>
-            )
+        </div>
+    )
 }
+
 export default OrderDetail;

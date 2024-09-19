@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import {ItemsResponse} from "../types/CartListing.ts";
 import {useNavigate} from "react-router-dom";
-import toast, {Toaster} from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import {API_BASE_URL} from "../utils/urls.ts";
 
 
@@ -48,34 +48,49 @@ function CartListing() {
 
     return (<div>
         <div className="container mt-5 mb-5">
-            <Toaster />
-            <nav className="panel">
-                <p className="panel-heading">Cart</p>
-                {cartList?.items?.map((item) => (
-
-
-                    <div className="panel-block" key={item.cart_item_id}>
-
-                        <figure className="image is-128x128">
-                            <img alt={item.menu_item.name} src={API_BASE_URL + "/" + item.menu_item.photo}/>
-                        </figure>
-
-
-                        <div className="columns has-text-centered">
-                            <div className="column is-12 has-text-centered">{item.menu_item.name}</div>
-                            <div className="column is-5 has-text-centered">Quantity: {item.quantity}</div>
-                            <div className="column is-5 has-text-centered">${item.menu_item.price}</div>
-                            <div className="column has-text-centered">
-                                <button onClick={() => removeItemFromCart(item.cart_item_id)} className="button is-info">REMOVE</button>
+            <section className="section">
+                <div className="container">
+                    <h1 className="title">Cart Items</h1>
+                    <div className="panel">
+                        <p className="panel-heading"></p>
+                        <div className="panel-block">
+                            <div className="columns is-vcentered">
+                                <div className="column is-4 has-text-centered has-text-weight-bold">Item</div>
+                                <div className="column has-text-centered has-text-weight-bold">Name</div>
+                                <div className="column is-4 has-text-centered has-text-weight-bold">Quantity</div>
+                                <div className="column has-text-centered has-text-weight-bold">Price</div>
+                                <div className="column has-text-centered has-text-weight-bold"></div>
                             </div>
                         </div>
 
-                    </div>
-                ))}
 
-            </nav>
+                        {cartList?.items?.map((item) => (
+                        <div className="panel-block">
+                            <div className="columns is-vcentered">
+                                <div className="column has-text-centered is-narrow">
+                                    <img alt={item.menu_item.name} src={API_BASE_URL + "/" + item.menu_item.photo}
+                                         className="image is-48x48"/>
+                                </div>
+                                <div className="column  has-text-centered">{item.menu_item.name}</div>
+                                <div className="column is-4  has-text-centered">{item.quantity}</div>
+                                <div className="column  has-text-centered">${item.menu_item.price}</div>
+                                <div className="column has-text-centered">
+                                    <button onClick={() => removeItemFromCart(item.cart_item_id)}
+                                            className="button is-info">REMOVE
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        ))}
+
+
+
+                    </div>
+                </div>
+            </section>
+
             <button onClick={PlaceOrder} className="button is-primary">PLACE ORDER</button>
-            </div>
+        </div>
 
     </div>)
 }
