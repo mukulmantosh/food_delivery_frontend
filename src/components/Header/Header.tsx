@@ -1,13 +1,11 @@
-import UserIcon from "./UserIcon.tsx";
-import Cart from "./Cart.tsx";
+import UserIcon from "./UserIcon";
+import Cart from "./Cart";
 import {Toaster} from "react-hot-toast";
-import Order from "./Order.tsx";
-import Notification from "./Notification.tsx";
+import Order from "./Order";
 
 function Header() {
     return (
         <div>
-            <Notification/>
             <Toaster/>
             <div className="container">
                 <div className="columns">

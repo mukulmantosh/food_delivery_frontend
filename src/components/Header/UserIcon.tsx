@@ -1,5 +1,6 @@
 import useAuth from "../../context/auth.tsx";
 import {USER_LOGOUT_URL, USER_REGISTER_URL} from "../../utils/urls.ts";
+import {Link} from "react-router-dom";
 
 
 function UserIcon() {
@@ -16,9 +17,9 @@ function UserIcon() {
     }
     return (
     <figure className="image is-48x48 mt-5">
-        <a href={link}>
+        <Link to={link}>
             <img alt="user" src={imageUrl}/>
-        </a>
+        </Link>
     </figure>
     )
 }

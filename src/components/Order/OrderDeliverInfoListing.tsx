@@ -21,11 +21,11 @@ function OrderDeliverInfoListing() {
         });
     }, []);
 
+
     return (
         <div>
             <div className="container mt-6">
                 <h1 className="title">Delivery Information</h1>
-
                 <table className="table is-bordered  is-hoverable is-fullwidth">
                     <thead>
                     <tr>
@@ -34,6 +34,7 @@ function OrderDeliverInfoListing() {
                         <th>Vehicle Information</th>
                         <th>Contact</th>
                         <th>Delivery Time</th>
+                        <th>Delivery Status</th>
                         <th>Created At</th>
                     </tr>
                     </thead>
@@ -44,7 +45,8 @@ function OrderDeliverInfoListing() {
                             <td>{data.name}</td>
                             <td><FontAwesomeIcon className="mr-1"  icon={faCar} /> {data.vehicle_details} </td>
                             <td><FontAwesomeIcon className="mr-1" icon={faPhone} /> {data.phone} </td>
-                            <td>{data.delivery_time}</td>
+                            <td>{data.delivery_status === 'delivered' ? data.delivery_time : '-'}</td>
+                            <td>{data.delivery_status}</td>
                             <td>{ConvertToReadableDateTime(data.created_at)}</td>
                         </tr>
                     ))}
